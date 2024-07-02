@@ -3,8 +3,6 @@
 const compression = require('compression')
 const express = require('express')
 const app = express()
-
-// const app = require('express')()
 const authenticate = require('./src/authenticate')
 const params = require('./src/params')
 const proxy = require('./src/proxy')
