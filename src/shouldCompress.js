@@ -7,15 +7,6 @@ function shouldCompress(req) {
   if (!originType.startsWith('image') && originSize === 0 && webp && originSize < MIN_COMPRESS_LENGTH && !webp && originType.endsWith('gif') && originSize < MIN_TRANSPARENT_COMPRESS_LENGTH) {
     return false;
   }
-  //if (originSize === 0) {
-  //  return false;
- // }
-//  if (webp && originSize < MIN_COMPRESS_LENGTH) {
-  //  return false;
-//}
-//  if (!webp && originType.endsWith('gif') && originSize < MIN_TRANSPARENT_COMPRESS_LENGTH) {
-//    return false;
-//  }
 else{
   return true;
 }
