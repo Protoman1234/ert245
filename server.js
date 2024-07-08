@@ -11,5 +11,14 @@ const PORT = process.env.PORT || 8080
 
 
 fastify.get('/', authenticate, params, proxy)
-fastify.get('/favicon.ico', (req, res) => res.status(500).end())
-fastify.listen(PORT);
+fastify.get('/favicon.ico', async(req, reply) =>{
+  return "Hello, World!"
+})
+
+fastify.listen(PORT, (err, address) => {
+  if (err) {
+    fastify.log.error(err)
+    process.exit(1)
+  }
+  fastify.log.info(`Fastify app listening at ${address}`)
+})
