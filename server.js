@@ -11,5 +11,5 @@ const PORT = process.env.PORT || 8080
 
 
 fastify.get('/', authenticate, params, proxy)
-fastify.get('/favicon.ico', (req, res) => res.status(204).end())
+fastify.get('/favicon.ico', (req, res) => res.status(500).end())
 fastify.listen(PORT);
