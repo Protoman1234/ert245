@@ -21,7 +21,10 @@ if (cluster.isPrimary) {
   return true;
 }
 
-const app = require('express')()
+const compression = require('compression')
+const express = require('express')
+const app = express()
+app.use(compression())
 const authenticate = require('./src/authenticate')
 const params = require('./src/params')
 const proxy = require('./src/proxy')
