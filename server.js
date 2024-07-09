@@ -1,17 +1,25 @@
 #!/usr/bin/env node
 'use strict'
 
-const compression = require('compression')
-const fastify = require('fastify')
-const app = fastify()
+const app = require('fastify')({
+  logger: true
+})
 
 const authenticate = require('./src/authenticate')
 const params = require('./src/params')
 const proxy = require('./src/proxy')
 
 const PORT = process.env.PORT || 8080
-app.use(compression())
+
 
 app.get('/', authenticate, params, proxy)
-app.get('/favicon.ico', (req, res) => res.status(204).end())
-app.listen(PORT, () => console.log(`Worker ${process.pid}: Listening on ${PORT}`))
+app.get('/favicon.ico', (req, res) => {
+  res.send()
+});
+
+try {
+app.listen(PORT);
+} catch(error) {
+  app.log.error(error);
+  process.exit(1)
+}
