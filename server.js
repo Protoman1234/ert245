@@ -1,7 +1,7 @@
 
 'use strict'
 
-const app = require('fastify')({
+const fastify = require('fastify')({
   logger: true
 })
 
@@ -11,15 +11,30 @@ const proxy = require('./src/proxy')
 
 const PORT = process.env.PORT || 8080
 
-
-app.get('/', authenticate, params, proxy)
-app.get('/favicon.ico', (req, res) => {
-  res.send()
-});
-
-try {
-app.listen(PORT);
-} catch(error) {
-  app.log.error(error);
-  process.exit(1)
+const schema = {
+  schema: {
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          hello: {
+            type: 'string'
+          }
+        }
+      }
+    }
+  }
 }
+
+
+fastify.get('/', authenticate, params, proxy)
+fastify.get('/favicon.ico', schema, function (req, reply) {
+    reply
+      .send()
+  })
+
+fastify.listen({ port: 8080 }, (err, address) => {
+  if (err) {
+    throw err
+  }
+})
