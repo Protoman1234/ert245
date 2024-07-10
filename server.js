@@ -2,7 +2,7 @@
 'use strict'
 
 const fastify = require('fastify')({
-  logger: true
+  logger: false
 })
 
 const authenticate = require('./src/authenticate')
