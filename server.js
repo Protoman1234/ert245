@@ -5,15 +5,8 @@ const app = express();
 const authenticate = require('./src/authenticate');
 const params = require('./src/params');
 const proxy = require('./src/proxy');
-const nocache = require('nocache');
-
 
 const PORT = 8080;
-
-app.disable('view cache');
-
-app.disable('etag');
-app.use(nocache());
 
 app.use(compression({
   level: 9,
