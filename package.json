@@ -15,8 +15,8 @@
     "lodash": "4.17.21",
     "request": "2.88.2",
     "sharp": "0.28.2",
-    "compression": "1.7.4",
-    "nocache": "4.0.0"
+    "compression": "1.7.4"
+ 
   },
   "engines": {
     "node": "20.15.0",
