@@ -1,40 +1,25 @@
-
+#!/usr/bin/env node
 'use strict'
-
-const fastify = require('fastify')({
-  logger: false
-})
-
-const authenticate = require('./src/authenticate')
-const params = require('./src/params')
-const proxy = require('./src/proxy')
-
-const PORT = process.env.PORT || 8080
-
-const schema = {
-  schema: {
-    response: {
-      200: {
-        type: 'object',
-        properties: {
-          hello: {
-            type: 'string'
-          }
-        }
-      }
-    }
-  }
-}
+const compression = require('compression');
+const express = require('express');
+const app = express();
+const authenticate = require('./src/authenticate');
+const params = require('./src/params');
+const proxy = require('./src/proxy');
 
 
-fastify.get('/', authenticate, params, proxy)
-fastify.get('/favicon.ico', schema, function (req, reply) {
-    reply
-      .send()
-  })
+const PORT = 8080;
 
-fastify.listen({ port: 8080 }, (err, address) => {
-  if (err) {
-    throw err
-  }
-})
+app.set('etag', false);
+
+app.disable('etag');
+
+
+app.use(compression({
+  level: 9,
+  threshold: 0
+}))
+app.enable('trust proxy');
+app.get('/', authenticate, params, proxy);
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+app.listen(PORT, () => console.log(`Worker ${process.pid}: Listening on ${PORT}`));
