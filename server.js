@@ -9,10 +9,10 @@ const proxy = require('./src/proxy');
 
 const PORT = 8080;
 
-app.set('etag', false);
+app.disable('view cache');
 
 app.disable('etag');
-
+app.use(nocache());
 
 app.use(compression({
   level: 9,
