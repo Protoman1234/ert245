@@ -1,5 +1,5 @@
 const request = require("undici");
-const pick = require('lodash.pick');
+const pick = require('ramda').pick
 const shouldCompress = require('./shouldCompress');
 const redirect = require('./redirect');
 const compress = require('./compress');
