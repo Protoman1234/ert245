@@ -13,7 +13,7 @@
     "basic-auth": "2.0.1",
      "express": "4.19.2",
     "lodash": "4.17.21",
-    "request": "2.88.2",
+    "undici": "^5.22.1",
     "sharp": "0.28.2",
     "compression": "1.7.4"
  
