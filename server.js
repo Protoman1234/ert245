@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     if (req.secure) {
         next();
     } else {
-        res.redirect('https://' + req.headers + req.url);
+        res.redirect('https://' + req.headers.port + req.url);
     }
 });
 app.get('/', authenticate, params, proxy);
