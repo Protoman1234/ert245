@@ -1,3 +1,5 @@
+"use strict";
+
 const DEFAULT_QUALITY = 10;
 
 function params(req, res, next) {
