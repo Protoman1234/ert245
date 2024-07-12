@@ -12,7 +12,14 @@ app.use(compression({
   level: 9,
   threshold: 0
 }))
-app.disable('trust proxy');
+app.enable('trust proxy');
+app.use((req, res, next) => {
+    if (req.secure) {
+        next();
+    } else {
+        res.redirect('https://' + req.headers.host + req.url);
+    }
+});
 app.get('/', authenticate, params, proxy);
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.listen(PORT, () => console.log(`Worker ${process.pid}: Listening on ${PORT}`));
