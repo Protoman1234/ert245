@@ -1,5 +1,5 @@
 'use strict'
-//const compression = require('compression');
+const compression = require('compression');
 const express = require('express');
 const app = express();
 const authenticate = require('./src/authenticate');
@@ -8,10 +8,10 @@ const proxy = require('./src/proxy');
 
 const PORT = 8080;
 
-//app.use(compression({
- // level: 9,
-//  threshold: 0
-//}))
+app.use(compression({
+ level: 9,
+threshold: 0
+}))
 app.enable('trust proxy');
 app.get('/', authenticate, params, proxy);
 app.get('/favicon.ico', (req, res) => res.status(204).end());
