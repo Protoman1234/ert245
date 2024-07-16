@@ -10,10 +10,7 @@ const fs = require('fs');
 
 const PORT = 8080;
 
-app.use(compression({
- level: 9,
-threshold: 0
-}))
+app.use(compression());
 app.enable('trust proxy');
 app.get('/', authenticate, params, proxy);
 app.get('/favicon.ico', (req, res) => res.status(204).end());
